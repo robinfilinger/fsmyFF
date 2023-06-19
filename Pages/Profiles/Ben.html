@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSV Table</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+  <table id="csvTable">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const csvFileName = 'data.csv'; // Specify the CSV file name
+
+    fetch(csvFileName)
+      .then(response => response.text())
+      .then(contents => {
+        const rows = contents.split('\n');
+
+        const table = document.getElementById('csvTable');
+        const thead = table.getElementsByTagName('thead')[0];
+        const tbody = table.getElementsByTagName('tbody')[0];
+
+        // Clear existing table data
+        thead.innerHTML = '';
+        tbody.innerHTML = '';
+
+        // Populate table with CSV data
+        rows.forEach(function(row, index) {
+          const cells = row.split(',');
+
+          if (index === 0) {
+            // Create table header
+            const headerRow = document.createElement('tr');
+            cells.forEach(function(cell) {
+              const th = document.createElement('th');
+              th.textContent = cell.trim();
+              headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+          } else {
+            // Create table rows
+            const dataRow = document.createElement('tr');
+            cells.forEach(function(cell) {
+              const td = document.createElement('td');
+              td.textContent = cell.trim();
+              dataRow.appendChild(td);
+            });
+            tbody.appendChild(dataRow);
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Failed to fetch the CSV file:', error);
+      });
+  </script>
+</body>
+</html>
