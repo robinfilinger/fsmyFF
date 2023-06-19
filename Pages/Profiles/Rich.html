@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Sheets Example</title>
+</head>
+<body onload="loadGoogleSheet()">
+  <table id="sheetData"></table>
+
+  <script>
+    function loadGoogleSheet() {
+      // Replace with your own Google Sheets API endpoint URL
+      const sheetURL = 'https://sheets.googleapis.com/v4/spreadsheets/14Xf3-6xbtr_KTy3mX4oipdmNiBkzrhcrbEIgvH9ynoA/values/Records!A1:Z1000?key=AIzaSyDBTJvmQpteguZ5cblHjx3YPEPULZJr8wY';
+      console.log("Function running");
+      fetch(sheetURL)
+        .then(response => response.json())
+        .then(data => {
+          const sheetData = data.values;
+
+          const table = document.getElementById('sheetData');
+          sheetData.forEach(row => {
+            const newRow = table.insertRow();
+            row.forEach(cell => {
+              const newCell = newRow.insertCell();
+              newCell.textContent = cell;
+            });
+          });
+        })
+        .catch(error => {
+          console.log('Error fetching Google Sheet:', error);
+        });
+    }
+    </script>
+</body>
+
+

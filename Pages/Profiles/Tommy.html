@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Excel to HTML</title>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <input type="file" id="excelFile" accept=".xlsx">
+    <table id="excelTable"></table>
+
+    <script>
+        document.getElementById('excelFile').addEventListener('change', handleFile, false);
+
+        function handleFile(e) {
+            var file = e.target.files[0];
+            var reader = new FileReader();
+            
+            console.log("Function was called");
+            reader.onload = function (e) {
+                var data = new Uint8Array(e.target.result);
+                var workbook = XLSX.read(data, { type: 'array' });
+                var worksheet = workbook.Sheets['Records'];
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+                console.log("here");
+                console.log(jsonData);
+
+                var table = document.getElementById('excelTable');
+                table.innerHTML = '';
+
+                jsonData.forEach(function (row) {
+                    var tr = document.createElement('tr');
+                    row.forEach(function (cellData) {
+                        var td = document.createElement('td');
+                        td.textContent = cellData;
+                        tr.appendChild(td);
+                    });
+                    table.appendChild(tr);
+                });
+            };
+
+            reader.readAsArrayBuffer(file);
+        }
+    </script>
+</body>
+</html>
