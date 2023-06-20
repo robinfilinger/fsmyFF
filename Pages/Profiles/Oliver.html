@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Sheets Example</title>
+</head>
+<body onload="loadGoogleSheet()">
+  <table id="OliverStats" style="margin-left: auto;margin-right: auto;">
+    <tr>
+        <th style="text-align: center;width: 10%;">Seasons</th>
+        <th style="text-align: center;width: 10%;">Championships</th>
+        <th style="text-align: center;width: 10%;">Sackos</th>
+        <th colspan="3" style="text-align: center;width: 30%;">All-Time Record</th>
+    </tr>
+    <tr>
+        <th style="text-align: center;"></th>
+        <th style="text-align: center;"></th>
+        <th style="text-align: center;"></th>
+        <th style="text-align: center;width: 10%;">Regular Season</th>
+        <th style="text-align: center;width: 10%;">Playoffs</th>
+        <th style="text-align: center;width: 10%;">Overall</th>
+    </tr>
+    <tr>
+        <td id="OliverSeasons" style="text-align: center;"></td>
+        <td id="OliverChampionships" style="text-align: center;"></td>
+        <td id="OliverSackos" style="text-align: center;"></td>
+        <td id="OliverWL" style="text-align: center;"></td>
+        <td id="OliverPWL" style="text-align: center;"></td>
+        <td id="OliverOWL" style="text-align: center;"></td>
+    </tr>
+  </table>
+
+  <script>
+    async function loadGoogleSheet() {
+        // Replace with your own Google Sheets API endpoint URL
+        const sheetURL = 'https://sheets.googleapis.com/v4/spreadsheets/14Xf3-6xbtr_KTy3mX4oipdmNiBkzrhcrbEIgvH9ynoA/values/Records!A1:Z1000?key=AIzaSyDBTJvmQpteguZ5cblHjx3YPEPULZJr8wY';
+        console.log("Function running");
+        data = await fetch(sheetURL);
+        data = await data.json();
+        data = data.values;
+        console.log(data);
+
+        data.forEach(function (row) {
+            {
+                if(row[0]=="Oliver")
+                {
+                    document.getElementById("OliverSeasons").innerHTML = row[1];       
+                    document.getElementById("OliverWL").innerHTML = row[11];               
+                    document.getElementById("OliverPWL").innerHTML = row[12];               
+                    document.getElementById("OliverOWL").innerHTML = row[13];               
+                }
+                    else{
+                    console.log("Not found")
+                }
+            };
+        }); 
+    }
+    </script>
+</body>
+
+
