@@ -1,38 +1,182 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Google Sheets Example</title>
+<title>Father Stretch My League</title>
+<link rel="icon" href="./../../Images/football.png">
+<link rel="stylesheet" href="./../../style.css">
+</style>
 </head>
-<body onload="loadGoogleSheet()">
-  <table id="OliverStats" style="margin-left: auto;margin-right: auto;">
-    <tr>
-        <th style="text-align: center;width: 10%;">Seasons</th>
-        <th style="text-align: center;width: 10%;">Championships</th>
-        <th style="text-align: center;width: 10%;">Sackos</th>
-        <th colspan="3" style="text-align: center;width: 30%;">All-Time Record</th>
-    </tr>
-    <tr>
-        <th style="text-align: center;"></th>
-        <th style="text-align: center;"></th>
-        <th style="text-align: center;"></th>
-        <th style="text-align: center;width: 10%;">Regular Season</th>
-        <th style="text-align: center;width: 10%;">Playoffs</th>
-        <th style="text-align: center;width: 10%;">Overall</th>
-    </tr>
-    <tr>
-        <td id="OliverSeasons" style="text-align: center;"></td>
-        <td id="OliverChampionships" style="text-align: center;"></td>
-        <td id="OliverSackos" style="text-align: center;"></td>
-        <td id="OliverWL" style="text-align: center;"></td>
-        <td id="OliverPWL" style="text-align: center;"></td>
-        <td id="OliverOWL" style="text-align: center;"></td>
-    </tr>
-  </table>
+<body style="margin: 0%;" onload="getStatistics()">
+
+    <div id="mySidenav" class="sidenav" style="background-color: blue;">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="./../Home.html">Home</a>
+        <a href="./../Members.html">League Members</a>
+        <a href="./../Winners.html">Past Winners</a>
+        <a href="./../Losers.html">Past Losers</a>
+        <a href="./../History.html">League History</a>
+    </div>     
+  
+  <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+  <div style="width:100%;">
+    <div style="background-color: #6e2fc9;margin: 0%;padding: 0%;border-bottom: 2px solid black;">
+      <span title="Menu" onclick="openNav()" style="padding: 0%;margin:0%;"><img src="./../../Images/Menu.png" style="width: 5vw;height: 5vw;margin: 0%;padding: 0%;"></span>
+      <a title="Back to Members" href="./../Members.html" style="width: 5vw;height: 5vw;margin: 0%;padding: 0%;"><img src="./../../Images/BackArrow.png" style="width: 5vw;height: 5vw;margin: 0%;padding: 0%;"></img></a>
+        <h1 style="text-align: center;color: white;padding-bottom: 5vw;margin: 0px;">
+          League Members
+        </h1>
+    </div>
+    <div style="background-color: white;">
+      <br>
+    </div>
+    <div>
+      <table id="OliverStats" style="margin-left: auto;margin-right: auto;width: 90%;border-collapse: collapse;table-layout: fixed;border: 2px solid black;">
+        <tr>
+            <th style="text-align: center;width: 15%;background-color: #6e2fc9; color: white; font-weight: bold; font-size: 20px;">Seasons</th>
+            <th style="text-align: center;width: 15%;background-color: #6e2fc9; color: white; font-weight: bold; font-size: 20px;border-left: 2px solid black;">Championships</th>
+            <th style="text-align: center;width: 15%;background-color: #6e2fc9; color: white; font-weight: bold; font-size: 20px;border-left: 2px solid black;">Sackos</th>
+            <th colspan="3" style="text-align: center;width: 45%;background-color: #6e2fc9; color: white; font-weight: bold; padding: 3px;font-size: 20px;border-left: 2px solid black;">All-Time Record</th>
+        </tr>
+        <tr style="border-bottom: 2px solid black;">
+            <th style="text-align: center;background-color: #6e2fc9; color: white; font-weight: bold; font-size: 13px;"></th>
+            <th style="text-align: center;background-color: #6e2fc9; color: white; font-weight: bold; font-size: 13px;border-left: 2px solid black;"></th>
+            <th style="text-align: center;background-color: #6e2fc9; color: white; font-weight: bold; font-size: 13px;border-left: 2px solid black;"></th>
+            <th style="text-align: center;width: 15%;background-color: #6e2fc9; color: white; font-weight: bold; font-size: 13px;border-left: 2px solid black;">Regular Season</th>
+            <th style="text-align: center;width: 15%;background-color: #6e2fc9; color: white; font-weight: bold; font-size: 13px;">Playoffs</th>
+            <th style="text-align: center;width: 15%;background-color: #6e2fc9; color: white; font-weight: bold; font-size: 13px;">Overall</th>
+        </tr>
+        <tr>
+            <td id="OliverSeasons" style="text-align: center;background-color: white;padding-top: 10px;padding-bottom: 10px; color: black; font-weight: bold;"></td>
+            <td id="OliverChampionships" style="text-align: center;border-left: 2px solid black;background-color: white; color: black; font-weight: bold;"></td>
+            <td id="OliverSackos" style="text-align: center;border-left: 2px solid black;background-color: white; color: black; font-weight: bold;"></td>
+            <td id="OliverWL" style="text-align: center;border-left: 2px solid black;background-color: white; color: black; font-weight: bold;"></td>
+            <td id="OliverPWL" style="text-align: center;background-color: white; color: black; font-weight: bold;"></td>
+            <td id="OliverOWL" style="text-align: center;background-color: white; color: black; font-weight: bold;"></td>
+        </tr>
+      </table>
+      <div style="background-color: white;">
+        <br>
+      </div>      
+      <div style="text-align: center;padding: 10px;">
+          <img src="./../../Images/MemberPhotos/Oliver.jpg" width="20%">
+          <h2> Oliver Kleban</h2>
+          <p style="font-size: 24px;width: 70%;margin-left: auto;margin-right: auto;"></p>
+      </div>
+      <div style="background-color: #6e2fc9;">
+        <h2 style="text-align: center;color: white;padding: 20px;font-size: 30px;">Statistics</h2>
+      </div>
+      <div>
+        <br>
+      </div>
+      <table style="margin-left: auto;margin-right: auto;width: 80%;border-collapse: collapse;border: 2px solid black;">
+        <tr style="background-color: #6e2fc9;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 20px;padding: 10px;">General</th>
+        </tr>
+        <tr>
+          <td >Seasons:</td>
+          <td id="OliverSeasons2"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Playoff Appearances</td>
+          <td id="OliverPlayoffs"></td>
+        </tr>
+        <tr>
+          <td>Sacko Appearances:</td>
+          <td id="OliverSackoApps"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Finals Appearances:</td>
+          <td id="OliverFinals"></td>
+        </tr>
+        <tr>
+          <td>Sackos:</td>
+          <td id="OliverSacks"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Championships:</td>
+          <td id="OliverChamps"></td>
+        </tr>
+        <tr style="background-color: #6e2fc9;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 20px;padding: 10px;">Season Finishes</th>
+        </tr>
+        <tr>
+          <td >Average Regular Season Finish:</td>
+          <td id="OliverAvgRegFin"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Average Overall Finish:</td>
+          <td id="OliverAvgOvrFin"></td>
+        </tr>
+        <tr>
+          <td >Best Regular Season Finish</td>
+          <td id="OliverBestRegFin"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Worst Regular Season Finish</td>
+          <td id="OliverWorstRegFin"></td>
+        </tr>
+        <tr>
+          <td >Best Regular Season Record</td>
+          <td id="OliverBestRegRec"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Worst Regular Season Record</td>
+          <td id="OliverWorstRegRec"></td>
+        </tr>
+        <tr>
+          <td>Best Overall Finish</td>
+          <td id="OliverBestOvrFin"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Worst Overall Finish</td>
+          <td id="OliverWorstOvrFin"></td>
+        </tr>
+        <tr style="background-color: #6e2fc9;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 20px;padding: 10px;">Scoring</th>
+        </tr>
+        <tr>
+          <td>Most Points For</td>
+          <td id="OliverMostPF"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Most Points Against</td>
+          <td id="OliverMostPA"></td>
+        </tr>
+        <tr>
+          <td>Points For Per Season</td>
+          <td id="OliverPFSzn"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Points Against Per Season</td>
+          <td id="OliverPASzn"></td>
+        </tr>
+        <tr>
+          <td>Points For Per Week</td>
+          <td id="OliverPFWeek"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Points Against Per Week</td>
+          <td id="OliverPAWeek"></td>
+        </tr>
+        <tr style="background-color: #6e2fc9;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 12px;padding: 10px;">Note: Scoring tracking began in the 2022 season due to a lack of data from prior seasons.</th>
+        </tr>
+        <!-- Add more rows as needed -->
+      </table>
+      
+    </div>
+    <br>
+    <br>
+    
+
+     
+  </div>
+
 
   <script>
-    async function loadGoogleSheet() {
+    /* Set the width of the side navigation to 250px */
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+async function getStatistics() {
         // Replace with your own Google Sheets API endpoint URL
-        const sheetURL = 'https://sheets.googleapis.com/v4/spreadsheets/14Xf3-6xbtr_KTy3mX4oipdmNiBkzrhcrbEIgvH9ynoA/values/Records!A1:Z1000?key=AIzaSyDBTJvmQpteguZ5cblHjx3YPEPULZJr8wY';
+        const sheetURL = 'https://sheets.googleapis.com/v4/spreadsheets/14Xf3-6xbtr_KTy3mX4oipdmNiBkzrhcrbEIgvH9ynoA/values/Records!A1:ZZ1000?key=AIzaSyDBTJvmQpteguZ5cblHjx3YPEPULZJr8wY';
         console.log("Function running");
         data = await fetch(sheetURL);
         data = await data.json();
@@ -43,10 +187,37 @@
             {
                 if(row[0]=="Oliver")
                 {
-                    document.getElementById("OliverSeasons").innerHTML = row[1];       
+                    document.getElementById("OliverSeasons").innerHTML = row[1];   
+                    document.getElementById("OliverChampionships").innerHTML = row[14];
+                    document.getElementById("OliverSackos").innerHTML = row[15];
                     document.getElementById("OliverWL").innerHTML = row[11];               
                     document.getElementById("OliverPWL").innerHTML = row[12];               
-                    document.getElementById("OliverOWL").innerHTML = row[13];               
+                    document.getElementById("OliverOWL").innerHTML = row[13];   
+
+                    document.getElementById("OliverSeasons2").innerHTML = row[1];
+                    document.getElementById("OliverPlayoffs").innerHTML = row[16];   
+                    document.getElementById("OliverFinals").innerHTML = row[17];
+                    document.getElementById("OliverChamps").innerHTML = row[14];   
+                    document.getElementById("OliverSackoApps").innerHTML = row[18];               
+                    document.getElementById("OliverSacks").innerHTML = row[15];  
+
+                    document.getElementById("OliverAvgRegFin").innerHTML = row[9];   
+                    document.getElementById("OliverAvgOvrFin").innerHTML = row[10];
+                    document.getElementById("OliverBestRegFin").innerHTML = row[20];
+                    document.getElementById("OliverWorstRegFin").innerHTML = row[23];               
+                    document.getElementById("OliverBestRegRec").innerHTML = row[19];               
+                    document.getElementById("OliverWorstRegRec").innerHTML = row[22];
+                    document.getElementById("OliverBestOvrFin").innerHTML = row[21];               
+                    document.getElementById("OliverWorstOvrFin").innerHTML = row[24];    
+                                 
+                    document.getElementById("OliverMostPF").innerHTML = row[25];
+                    document.getElementById("OliverMostPA").innerHTML = row[26];   
+                    document.getElementById("OliverPFSzn").innerHTML = row[27];
+                    document.getElementById("OliverPASzn").innerHTML = row[28];   
+                    document.getElementById("OliverPFWeek").innerHTML = row[29];               
+                    document.getElementById("OliverPAWeek").innerHTML = row[30];  
+                                
+
                 }
                     else{
                     console.log("Not found")
@@ -55,6 +226,10 @@
         }); 
     }
     </script>
+  </script>
+
+
+ 
+
 </body>
-
-
+</html>

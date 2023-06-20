@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="./../../style.css">
 </style>
 </head>
-<body style="margin: 0%;">
+<body style="margin: 0%;" onload="getStatistics()">
 
     <div id="mySidenav" class="sidenav" style="background-color: blue;">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -17,25 +17,149 @@
         <a href="./../History.html">League History</a>
     </div>     
   
-   
-  </div>
-  
   <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
-  <div style="width:100%">
-    <div style="background-color: #0804fc;margin: 0%;padding: 0%;">
-      <span onclick="openNav()" style="padding: 0%;margin:0%;"><img src="./../../Images/Menu.png" style="width: 5vw;height: 5vw;margin: 0%;padding: 0%;"></span>
+  <div style="width:100%;">
+    <div style="background-color: #000E2F;margin: 0%;padding: 0%;border-bottom: 2px solid black;">
+      <span title="Menu" onclick="openNav()" style="padding: 0%;margin:0%;"><img src="./../../Images/Menu.png" style="width: 5vw;height: 5vw;margin: 0%;padding: 0%;"></span>
+      <a title="Back to Members" href="./../Members.html" style="width: 5vw;height: 5vw;margin: 0%;padding: 0%;"><img src="./../../Images/BackArrow.png" style="width: 5vw;height: 5vw;margin: 0%;padding: 0%;"></img></a>
         <h1 style="text-align: center;color: white;padding-bottom: 5vw;margin: 0px;">
           League Members
         </h1>
     </div>
-    <div style="text-align: left;padding: 10px;">
-        <a href="./../Members.html" style="text-decoration: none;"> Back to league members</a>
+    <div style="background-color: white;">
+      <br>
     </div>
-    <div style="text-align: center;padding: 10px;">
-        <img src="./../../Images/MemberPhotos/Josh.jpg" width="20%">
-        <h2>Josh Schlactus</h2>
+    <div>
+      <table id="JoshStats" style="margin-left: auto;margin-right: auto;width: 90%;border-collapse: collapse;table-layout: fixed;border: 2px solid black;">
+        <tr>
+            <th style="text-align: center;width: 15%;background-color: #000E2F; color: white; font-weight: bold; font-size: 20px;">Seasons</th>
+            <th style="text-align: center;width: 15%;background-color: #000E2F; color: white; font-weight: bold; font-size: 20px;border-left: 2px solid black;">Championships</th>
+            <th style="text-align: center;width: 15%;background-color: #000E2F; color: white; font-weight: bold; font-size: 20px;border-left: 2px solid black;">Sackos</th>
+            <th colspan="3" style="text-align: center;width: 45%;background-color: #000E2F; color: white; font-weight: bold; padding: 3px;font-size: 20px;border-left: 2px solid black;">All-Time Record</th>
+        </tr>
+        <tr style="border-bottom: 2px solid black;">
+            <th style="text-align: center;background-color: #000E2F; color: white; font-weight: bold; font-size: 13px;"></th>
+            <th style="text-align: center;background-color: #000E2F; color: white; font-weight: bold; font-size: 13px;border-left: 2px solid black;"></th>
+            <th style="text-align: center;background-color: #000E2F; color: white; font-weight: bold; font-size: 13px;border-left: 2px solid black;"></th>
+            <th style="text-align: center;width: 15%;background-color: #000E2F; color: white; font-weight: bold; font-size: 13px;border-left: 2px solid black;">Regular Season</th>
+            <th style="text-align: center;width: 15%;background-color: #000E2F; color: white; font-weight: bold; font-size: 13px;">Playoffs</th>
+            <th style="text-align: center;width: 15%;background-color: #000E2F; color: white; font-weight: bold; font-size: 13px;">Overall</th>
+        </tr>
+        <tr>
+            <td id="JoshSeasons" style="text-align: center;background-color: white;padding-top: 10px;padding-bottom: 10px; color: black; font-weight: bold;"></td>
+            <td id="JoshChampionships" style="text-align: center;border-left: 2px solid black;background-color: white; color: black; font-weight: bold;"></td>
+            <td id="JoshSackos" style="text-align: center;border-left: 2px solid black;background-color: white; color: black; font-weight: bold;"></td>
+            <td id="JoshWL" style="text-align: center;border-left: 2px solid black;background-color: white; color: black; font-weight: bold;"></td>
+            <td id="JoshPWL" style="text-align: center;background-color: white; color: black; font-weight: bold;"></td>
+            <td id="JoshOWL" style="text-align: center;background-color: white; color: black; font-weight: bold;"></td>
+        </tr>
+      </table>
+      <div style="background-color: white;">
+        <br>
+      </div>      
+      <div style="text-align: center;padding: 10px;">
+          <img src="./../../Images/MemberPhotos/Josh.jpg" width="20%">
+          <h2> Josh Schlactus</h2>
+          <p style="font-size: 24px;width: 70%;margin-left: auto;margin-right: auto;"></p>
+      </div>
+      <div style="background-color: #000E2F;">
+        <h2 style="text-align: center;color: white;padding: 20px;font-size: 30px;">Statistics</h2>
+      </div>
+      <div>
+        <br>
+      </div>
+      <table style="margin-left: auto;margin-right: auto;width: 80%;border-collapse: collapse;border: 2px solid black;">
+        <tr style="background-color: #000E2F;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 20px;padding: 10px;">General</th>
+        </tr>
+        <tr>
+          <td >Seasons:</td>
+          <td id="JoshSeasons2"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Playoff Appearances</td>
+          <td id="JoshPlayoffs"></td>
+        </tr>
+        <tr>
+          <td>Sacko Appearances:</td>
+          <td id="JoshSackoApps"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Finals Appearances:</td>
+          <td id="JoshFinals"></td>
+        </tr>
+        <tr>
+          <td>Sackos:</td>
+          <td id="JoshSacks"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Championships:</td>
+          <td id="JoshChamps"></td>
+        </tr>
+        <tr style="background-color: #000E2F;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 20px;padding: 10px;">Season Finishes</th>
+        </tr>
+        <tr>
+          <td >Average Regular Season Finish:</td>
+          <td id="JoshAvgRegFin"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Average Overall Finish:</td>
+          <td id="JoshAvgOvrFin"></td>
+        </tr>
+        <tr>
+          <td >Best Regular Season Finish</td>
+          <td id="JoshBestRegFin"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Worst Regular Season Finish</td>
+          <td id="JoshWorstRegFin"></td>
+        </tr>
+        <tr>
+          <td >Best Regular Season Record</td>
+          <td id="JoshBestRegRec"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Worst Regular Season Record</td>
+          <td id="JoshWorstRegRec"></td>
+        </tr>
+        <tr>
+          <td>Best Overall Finish</td>
+          <td id="JoshBestOvrFin"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Worst Overall Finish</td>
+          <td id="JoshWorstOvrFin"></td>
+        </tr>
+        <tr style="background-color: #000E2F;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 20px;padding: 10px;">Scoring</th>
+        </tr>
+        <tr>
+          <td>Most Points For</td>
+          <td id="JoshMostPF"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Most Points Against</td>
+          <td id="JoshMostPA"></td>
+        </tr>
+        <tr>
+          <td>Points For Per Season</td>
+          <td id="JoshPFSzn"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Points Against Per Season</td>
+          <td id="JoshPASzn"></td>
+        </tr>
+        <tr>
+          <td>Points For Per Week</td>
+          <td id="JoshPFWeek"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Points Against Per Week</td>
+          <td id="JoshPAWeek"></td>
+        </tr>
+        <tr style="background-color: #000E2F;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 12px;padding: 10px;">Note: Scoring tracking began in the 2022 season due to a lack of data from prior seasons.</th>
+        </tr>
+        <!-- Add more rows as needed -->
+      </table>
+      
     </div>
+    <br>
+    <br>
+    
 
+     
   </div>
 
 
@@ -49,7 +173,61 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+
+async function getStatistics() {
+        // Replace with your own Google Sheets API endpoint URL
+        const sheetURL = 'https://sheets.googleapis.com/v4/spreadsheets/14Xf3-6xbtr_KTy3mX4oipdmNiBkzrhcrbEIgvH9ynoA/values/Records!A1:ZZ1000?key=AIzaSyDBTJvmQpteguZ5cblHjx3YPEPULZJr8wY';
+        console.log("Function running");
+        data = await fetch(sheetURL);
+        data = await data.json();
+        data = data.values;
+        console.log(data);
+
+        data.forEach(function (row) {
+            {
+                if(row[0]=="Josh")
+                {
+                    document.getElementById("JoshSeasons").innerHTML = row[1];   
+                    document.getElementById("JoshChampionships").innerHTML = row[14];
+                    document.getElementById("JoshSackos").innerHTML = row[15];
+                    document.getElementById("JoshWL").innerHTML = row[11];               
+                    document.getElementById("JoshPWL").innerHTML = row[12];               
+                    document.getElementById("JoshOWL").innerHTML = row[13];   
+
+                    document.getElementById("JoshSeasons2").innerHTML = row[1];
+                    document.getElementById("JoshPlayoffs").innerHTML = row[16];   
+                    document.getElementById("JoshFinals").innerHTML = row[17];
+                    document.getElementById("JoshChamps").innerHTML = row[14];   
+                    document.getElementById("JoshSackoApps").innerHTML = row[18];               
+                    document.getElementById("JoshSacks").innerHTML = row[15];  
+
+                    document.getElementById("JoshAvgRegFin").innerHTML = row[9];   
+                    document.getElementById("JoshAvgOvrFin").innerHTML = row[10];
+                    document.getElementById("JoshBestRegFin").innerHTML = row[20];
+                    document.getElementById("JoshWorstRegFin").innerHTML = row[23];               
+                    document.getElementById("JoshBestRegRec").innerHTML = row[19];               
+                    document.getElementById("JoshWorstRegRec").innerHTML = row[22];
+                    document.getElementById("JoshBestOvrFin").innerHTML = row[21];               
+                    document.getElementById("JoshWorstOvrFin").innerHTML = row[24];    
+                                 
+                    document.getElementById("JoshMostPF").innerHTML = row[25];
+                    document.getElementById("JoshMostPA").innerHTML = row[26];   
+                    document.getElementById("JoshPFSzn").innerHTML = row[27];
+                    document.getElementById("JoshPASzn").innerHTML = row[28];   
+                    document.getElementById("JoshPFWeek").innerHTML = row[29];               
+                    document.getElementById("JoshPAWeek").innerHTML = row[30];  
+                                
+
+                }
+                    else{
+                    console.log("Not found")
+                }
+            };
+        }); 
+    }
+    </script>
   </script>
+
 
  
 

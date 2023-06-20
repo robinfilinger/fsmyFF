@@ -1,90 +1,238 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Excel to HTML</title>
-    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-    <script>var file = "./../../Data/Records.xlsx" </script>
+<title>Father Stretch My League</title>
+<link rel="icon" href="./../../Images/football.png">
+<link rel="stylesheet" href="./../../style.css">
+</style>
 </head>
-<body onload="handleFile(file)">
-    <input type="file" id="excelFile" accept=".xlsx">
-    <table id="excelTable"></table>
+<body style="margin: 0%;" onload="getStatistics()">
+
+    <div id="mySidenav" class="sidenav" style="background-color: blue;">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="./../Home.html">Home</a>
+        <a href="./../Members.html">League Members</a>
+        <a href="./../Winners.html">Past Winners</a>
+        <a href="./../Losers.html">Past Losers</a>
+        <a href="./../History.html">League History</a>
+    </div>     
+  
+  <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+  <div style="width:100%;">
+    <div style="background-color: #d7230e;margin: 0%;padding: 0%;border-bottom: 2px solid black;">
+      <span title="Menu" onclick="openNav()" style="padding: 0%;margin:0%;"><img src="./../../Images/Menu.png" style="width: 5vw;height: 5vw;margin: 0%;padding: 0%;"></span>
+      <a title="Back to Members" href="./../Members.html" style="width: 5vw;height: 5vw;margin: 0%;padding: 0%;"><img src="./../../Images/BackArrow.png" style="width: 5vw;height: 5vw;margin: 0%;padding: 0%;"></img></a>
+        <h1 style="text-align: center;color: white;padding-bottom: 5vw;margin: 0px;">
+          League Members
+        </h1>
+    </div>
+    <div style="background-color: #f2d735;">
+      <br>
+    </div>
+    <div style="background-color: #f2d735;">
+      <table id="PopperStats" style="margin-left: auto;margin-right: auto;width: 90%;border-collapse: collapse;table-layout: fixed;border: 2px solid black;">
+        <tr>
+            <th style="text-align: center;width: 15%;background-color: #d7230e; color: white; font-weight: bold; font-size: 20px;">Seasons</th>
+            <th style="text-align: center;width: 15%;background-color: #d7230e; color: white; font-weight: bold; font-size: 20px;border-left: 2px solid black;">Championships</th>
+            <th style="text-align: center;width: 15%;background-color: #d7230e; color: white; font-weight: bold; font-size: 20px;border-left: 2px solid black;">Sackos</th>
+            <th colspan="3" style="text-align: center;width: 45%;background-color: #d7230e; color: white; font-weight: bold; padding: 3px;font-size: 20px;border-left: 2px solid black;">All-Time Record</th>
+        </tr>
+        <tr style="border-bottom: 2px solid black;">
+            <th style="text-align: center;background-color: #d7230e; color: white; font-weight: bold; font-size: 13px;"></th>
+            <th style="text-align: center;background-color: #d7230e; color: white; font-weight: bold; font-size: 13px;border-left: 2px solid black;"></th>
+            <th style="text-align: center;background-color: #d7230e; color: white; font-weight: bold; font-size: 13px;border-left: 2px solid black;"></th>
+            <th style="text-align: center;width: 15%;background-color: #d7230e; color: white; font-weight: bold; font-size: 13px;border-left: 2px solid black;">Regular Season</th>
+            <th style="text-align: center;width: 15%;background-color: #d7230e; color: white; font-weight: bold; font-size: 13px;">Playoffs</th>
+            <th style="text-align: center;width: 15%;background-color: #d7230e; color: white; font-weight: bold; font-size: 13px;">Overall</th>
+        </tr>
+        <tr>
+            <td id="PopperSeasons" style="text-align: center;background-color: #f2d735;padding-top: 10px;padding-bottom: 10px; color: black; font-weight: bold;"></td>
+            <td id="PopperChampionships" style="text-align: center;border-left: 2px solid black;background-color: #f2d735; color: black; font-weight: bold;"></td>
+            <td id="PopperSackos" style="text-align: center;border-left: 2px solid black;background-color: #f2d735; color: black; font-weight: bold;"></td>
+            <td id="PopperWL" style="text-align: center;border-left: 2px solid black;background-color: #f2d735; color: black; font-weight: bold;"></td>
+            <td id="PopperPWL" style="text-align: center;background-color: #f2d735; color: black; font-weight: bold;"></td>
+            <td id="PopperOWL" style="text-align: center;background-color: #f2d735; color: black; font-weight: bold;"></td>
+        </tr>
+      </table>
+      <div style="background-color: #f2d735;">
+        <br>
+      </div>      
+      <div style="text-align: center;padding: 10px;">
+          <img src="./../../Images/MemberPhotos/Popper.jpg" width="20%">
+          <h2> Jesse Popper</h2>
+          <p style="font-size: 24px;width: 70%;margin-left: auto;margin-right: auto;"></p>
+      </div>
+      <div style="background-color: #d7230e;">
+        <h2 style="text-align: center;color: white;padding: 20px;font-size: 30px;">Statistics</h2>
+      </div>
+      <div>
+        <br>
+      </div>
+      <table style="margin-left: auto;margin-right: auto;width: 80%;border-collapse: collapse;border: 2px solid black;">
+        <tr style="background-color: #d7230e;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 20px;padding: 10px;">General</th>
+        </tr>
+        <tr>
+          <td >Seasons:</td>
+          <td id="PopperSeasons2"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Playoff Appearances</td>
+          <td id="PopperPlayoffs"></td>
+        </tr>
+        <tr>
+          <td>Sacko Appearances:</td>
+          <td id="PopperSackoApps"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Finals Appearances:</td>
+          <td id="PopperFinals"></td>
+        </tr>
+        <tr>
+          <td>Sackos:</td>
+          <td id="PopperSacks"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Championships:</td>
+          <td id="PopperChamps"></td>
+        </tr>
+        <tr style="background-color: #d7230e;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 20px;padding: 10px;">Season Finishes</th>
+        </tr>
+        <tr>
+          <td >Average Regular Season Finish:</td>
+          <td id="PopperAvgRegFin"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Average Overall Finish:</td>
+          <td id="PopperAvgOvrFin"></td>
+        </tr>
+        <tr>
+          <td >Best Regular Season Finish</td>
+          <td id="PopperBestRegFin"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Worst Regular Season Finish</td>
+          <td id="PopperWorstRegFin"></td>
+        </tr>
+        <tr>
+          <td >Best Regular Season Record</td>
+          <td id="PopperBestRegRec"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Worst Regular Season Record</td>
+          <td id="PopperWorstRegRec"></td>
+        </tr>
+        <tr>
+          <td>Best Overall Finish</td>
+          <td id="PopperBestOvrFin"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Worst Overall Finish</td>
+          <td id="PopperWorstOvrFin"></td>
+        </tr>
+        <tr style="background-color: #d7230e;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 20px;padding: 10px;">Scoring</th>
+        </tr>
+        <tr>
+          <td>Most Points For</td>
+          <td id="PopperMostPF"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Most Points Against</td>
+          <td id="PopperMostPA"></td>
+        </tr>
+        <tr>
+          <td>Points For Per Season</td>
+          <td id="PopperPFSzn"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Points Against Per Season</td>
+          <td id="PopperPASzn"></td>
+        </tr>
+        <tr>
+          <td>Points For Per Week</td>
+          <td id="PopperPFWeek"></td>
+          <td></td> <!-- Empty cell for space -->
+          <td>Points Against Per Week</td>
+          <td id="PopperPAWeek"></td>
+        </tr>
+        <tr style="background-color: #d7230e;">
+          <th colspan="5" style="text-align: center; color: white; font-weight: bold; font-size: 12px;padding: 10px;">Note: Scoring tracking began in the 2022 season due to a lack of data from prior seasons.</th>
+        </tr>
+        <!-- Add more rows as needed -->
+      </table>
+      
+    </div>
+    <div style="background-color: #f2d735;">
+        <br>
+        <br>
+    </div>
+    
+    
+
      
+  </div>
 
-    <script>
-        document.getElementById('excelFile').addEventListener('change', handleFile, false);
 
-        function handleFile(e) {
-            var file = e.target.files[0];
-            var reader = new FileReader();
-            
-            console.log("Function was called");
-            reader.onload = function (e) {
-                var data = new Uint8Array(e.target.result);
-                var workbook = XLSX.read(data, { type: 'array' });
-                var worksheet = workbook.Sheets['Records'];
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+  <script>
+    /* Set the width of the side navigation to 250px */
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
 
-                console.log("here");
-                console.log(jsonData);
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
 
-                var table = document.getElementById('excelTable');
-                table.innerHTML = '';
+async function getStatistics() {
+        // Replace with your own Google Sheets API endpoint URL
+        const sheetURL = 'https://sheets.googleapis.com/v4/spreadsheets/14Xf3-6xbtr_KTy3mX4oipdmNiBkzrhcrbEIgvH9ynoA/values/Records!A1:ZZ1000?key=AIzaSyDBTJvmQpteguZ5cblHjx3YPEPULZJr8wY';
+        console.log("Function running");
+        data = await fetch(sheetURL);
+        data = await data.json();
+        data = data.values;
+        console.log(data);
 
-                jsonData.forEach(function (row) {
-                    var tr = document.createElement('tr');
-                    {
-                        if(row[0]=="Team")
-                        {
+        data.forEach(function (row) {
+            {
+                if(row[0]=="Popper")
+                {
+                    document.getElementById("PopperSeasons").innerHTML = row[1];   
+                    document.getElementById("PopperChampionships").innerHTML = row[14];
+                    document.getElementById("PopperSackos").innerHTML = row[15];
+                    document.getElementById("PopperWL").innerHTML = row[11];               
+                    document.getElementById("PopperPWL").innerHTML = row[12];               
+                    document.getElementById("PopperOWL").innerHTML = row[13];   
 
-                            console.log(row)
-                            var seasons = document.createElement('td');
-                            //var championships = document.createElement('td');
-                            //var sackos = document.createElement('td');
-                            var WL = document.createElement('td');
-                            var PWL = document.createElement('td');
-                            var OWL = document.createElement('td');
+                    document.getElementById("PopperSeasons2").innerHTML = row[1];
+                    document.getElementById("PopperPlayoffs").innerHTML = row[16];   
+                    document.getElementById("PopperFinals").innerHTML = row[17];
+                    document.getElementById("PopperChamps").innerHTML = row[14];   
+                    document.getElementById("PopperSackoApps").innerHTML = row[18];               
+                    document.getElementById("PopperSacks").innerHTML = row[15];  
 
-                            seasons.textContent = row[1];
-                            WL.textContent=row[11];
-                            PWL.textContent="Playoffs";
-                            OWL.textContent="Overall";
-                            console.log(WL);
+                    document.getElementById("PopperAvgRegFin").innerHTML = row[9];   
+                    document.getElementById("PopperAvgOvrFin").innerHTML = row[10];
+                    document.getElementById("PopperBestRegFin").innerHTML = row[20];
+                    document.getElementById("PopperWorstRegFin").innerHTML = row[23];               
+                    document.getElementById("PopperBestRegRec").innerHTML = row[19];               
+                    document.getElementById("PopperWorstRegRec").innerHTML = row[22];
+                    document.getElementById("PopperBestOvrFin").innerHTML = row[21];               
+                    document.getElementById("PopperWorstOvrFin").innerHTML = row[24];    
+                                 
+                    document.getElementById("PopperMostPF").innerHTML = row[25];
+                    document.getElementById("PopperMostPA").innerHTML = row[26];   
+                    document.getElementById("PopperPFSzn").innerHTML = row[27];
+                    document.getElementById("PopperPASzn").innerHTML = row[28];   
+                    document.getElementById("PopperPFWeek").innerHTML = row[29];               
+                    document.getElementById("PopperPAWeek").innerHTML = row[30];  
+                                
 
-                            tr.appendChild(seasons);
-                            tr.appendChild(WL);
-                            tr.appendChild(PWL);
-                            tr.appendChild(OWL);
-                        }
-                        else if(row[0]=="Popper")
-                        {
-                            var seasons = document.createElement('td');
-                            //var championships = document.createElement('td');
-                            //var sackos = document.createElement('td');
-                            var WL = document.createElement('td');
-                            var PWL = document.createElement('td');
-                            var OWL = document.createElement('td');
-                            
-                            seasons.textContent = row[1];
-                            WL.textContent=row[11];
-                            PWL.textContent=row[12];
-                            OWL.textContent=row[13];
-                            console.log(WL);
-
-                            tr.appendChild(seasons);
-                            tr.appendChild(WL);
-                            tr.appendChild(PWL);
-                            tr.appendChild(OWL);
-                        }
-                         else{
-                            console.log("Not found")
-                        }
-                    };
-                    table.appendChild(tr);
-                });
+                }
+                    else{
+                    console.log("Not found")
+                }
             };
-
-            reader.readAsArrayBuffer(file);
-        }
+        }); 
+    }
     </script>
+  </script>
+
+
+ 
+
 </body>
 </html>
